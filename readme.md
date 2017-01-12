@@ -181,11 +181,11 @@ application.secret_key = 'Add your secret key'
 
 69) CREATE DATABASE category;
 
-70) CREATE USER grader;
+70) CREATE USER category;
 
-71) ALTER ROLE grader WITH PASSWORD 'grader1234567890';
+71) ALTER ROLE category WITH PASSWORD 'password';
 
-72) GRANT ALL PRIVILEGES ON DATABASE category TO grader;
+72) GRANT ALL PRIVILEGES ON DATABASE category TO category;
 
 73) \q
 
@@ -202,7 +202,7 @@ application.secret_key = 'Add your secret key'
 79) sudo mv main.py __init__.py
 
 80) go into files and replace engine = create engine calls with:
-engine = create_engine('postgresql:///category:grader1234567890')
+engine = create_engine('postgresql:///category:password@localhost/category')
 
 81) source venv/bin/activate
 
@@ -222,9 +222,7 @@ engine = create_engine('postgresql:///category:grader1234567890')
 
 89) sudo easy_install psycopg2
 
-Current Error:
-sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) FATAL:  database "category:grader1234567890" does not exist
-
+90) pip install --upgrade oauth2client
 ### useful personal commands:
 /etc/apache2/sites-available
 pip list
