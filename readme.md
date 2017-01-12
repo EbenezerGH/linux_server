@@ -15,6 +15,22 @@ port 2200
 
 4) ssh -i ~/.ssh/udacity_key.rsa root@35.167.206.80
 
+5) sudo adduser grader
+
+6) sudo visudo - enter grader ALL=(ALL:ALL) ALL
+
+7) sudo nano /etc/sudoers
+
+8) touch /etc/sudoers.d/grader
+
+9) sudo nano /etc/sudoers.d/grader enter grader ALL=(ALL:ALL) ALL
+
+10) sudo apt-get update
+
+11) sudo apt-get upgrade
+
+12) sudo nano /etc/ssh/sshd_config
+
 
 
 Sources:
