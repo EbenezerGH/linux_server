@@ -3,10 +3,9 @@
 
 ##server configurations:
 35.167.63.158
-http://ec2-35.-67-63-158.us-west-2.compute.amazonaws.com/
+http://ec2-35-167-63-158.us-west-2.compute.amazonaws.com/
 port 2200
 
-pass grader1234567890 -- remove
 1) download private key
 
 2) mv udacity_key.rsa ~/.ssh
