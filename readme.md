@@ -8,8 +8,11 @@ port 2200
 
 
 1) download private key
+
 2) mv udacity_key.rsa ~/.ssh
+
 3) chmod 600 ~/.ssh/udacity_key.rsa
+
 4) ssh -i ~/.ssh/udacity_key.rsa root@35.167.206.80
 
 
