@@ -160,9 +160,7 @@ if __name__ == "__main__":
 
 62)sudo nano flaskapp.wsgi
 
-63) add this to the file:
-
-#!/usr/bin/python
+63) add this to the file: #!/usr/bin/python
 import sys
 import logging
 logging.basicConfig(stream=sys.stderr)
@@ -224,14 +222,15 @@ engine = create_engine('postgresql:///category:grader1234567890')
 
 89) sudo easy_install psycopg2
 
-90) pip list
-
 Current Error:
 when run python database_setup.py in terminal:
 sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) FATAL:  role "grader" does not exist
 
-### useful commands:
+### useful personal commands:
 /etc/apache2/sites-available
+pip list
+
+
 Sources:
 https://www.udacity.com/account#!/development_environment
 https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
@@ -243,3 +242,4 @@ https://github.com/EbenezerGH/item-category/blob/master/database_setup.py
 https://forums.aws.amazon.com/message.jspa?messageID=495274
 https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps
 http://stackoverflow.com/questions/20414015/no-module-named-flask-using-virtualenv
+http://stackoverflow.com/questions/12728004/error-no-module-named-psycopg2-extensions
