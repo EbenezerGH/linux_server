@@ -223,6 +223,16 @@ engine = create_engine('postgresql:///category:password@localhost/category')
 89) sudo easy_install psycopg2
 
 90) pip install --upgrade oauth2client
+
+91) sudo mv flaskapp.wsgi FlaskApp/
+
+92) sudo service apache2 restart
+
+93) ServerAlias HOSTNAME http://ec2-35-167-63-158.us-west-2.compute.amazonaws.com/
+
+Error:
+Nothing is displaying on page
+
 ### useful personal commands:
 /etc/apache2/sites-available
 pip list
