@@ -181,11 +181,11 @@ application.secret_key = 'Add your secret key'
 
 69) CREATE DATABASE category;
 
-70) CREATE USER category;
+70) CREATE USER grader;
 
-71) ALTER ROLE category WITH PASSWORD 'grader1234567890';
+71) ALTER ROLE grader WITH PASSWORD 'grader1234567890';
 
-72) GRANT ALL PRIVILEGES ON DATABASE category TO category;
+72) GRANT ALL PRIVILEGES ON DATABASE category TO grader;
 
 73) \q
 
@@ -223,8 +223,7 @@ engine = create_engine('postgresql:///category:grader1234567890')
 89) sudo easy_install psycopg2
 
 Current Error:
-when run python database_setup.py in terminal:
-sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) FATAL:  role "grader" does not exist
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) FATAL:  database "category:grader1234567890" does not exist
 
 ### useful personal commands:
 /etc/apache2/sites-available
