@@ -2,9 +2,9 @@
 # Project 7 - Linux Configuration Server
 
 ##server configurations:
-35.167.63.158
-http://ec2-35-167-63-158.us-west-2.compute.amazonaws.com/
-port 2200
+IP: 35.167.63.158
+AWS: http://ec2-35-167-63-158.us-west-2.compute.amazonaws.com/
+SSH PORT: port 2200
 
 1) download private key
 
@@ -224,7 +224,9 @@ engine = create_engine('postgresql:///category:password@localhost/category')
 
 90) pip install --upgrade oauth2client
 
-91) sudo mv flaskapp.wsgi FlaskApp/
+91) sudo mv flaskapp.wsgi /var/www/FlaskApp/
+
+92) pip install Flask-SQLAlchemy
 
 92) sudo service apache2 restart
 
@@ -236,9 +238,9 @@ Nothing is displaying on page
 ### useful personal commands:
 /etc/apache2/sites-available
 pip list
+sudo tail -10 /var/log/apache2/error.log
 
-
-Sources:
+Resources:
 https://www.udacity.com/account#!/development_environment
 https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
 https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu
@@ -250,3 +252,4 @@ https://forums.aws.amazon.com/message.jspa?messageID=495274
 https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps
 http://stackoverflow.com/questions/20414015/no-module-named-flask-using-virtualenv
 http://stackoverflow.com/questions/12728004/error-no-module-named-psycopg2-extensions
+http://stackoverflow.com/questions/10572498/importerror-no-module-named-sqlalchemy
