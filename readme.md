@@ -173,6 +173,35 @@ application.secret_key = 'Add your secret key'
 
 64)sudo service apache2 restart
 
+65) sudo apt-get update
+
+66) sudo apt-get install postgresql postgresql-contrib
+
+67) sudo su - postgres
+
+68) psql
+
+69) CREATE DATABASE category;
+
+70) CREATE USER category;
+
+71) ALTER ROLE category WITH PASSWORD 'grader1234567890';
+
+72) GRANT ALL PRIVILEGES ON DATABASE category TO category;
+
+73) \q
+
+74) exit
+
+75) sudo apt-get install git
+
+76) sudo git clone https://github.com/EbenezerGH/item-category.git
+
+77) sudo mv item-category/[everything in here] sudo mv /FlaskApp
+
+78) sudo rm -r item-category
+
+79) sudo mv main.py __init__.py
 
 
 ### useful commands:
@@ -186,3 +215,4 @@ https://ubuntuforums.org/
 http://linuxcommand.org/
 https://github.com/EbenezerGH/item-category/blob/master/database_setup.py
 https://forums.aws.amazon.com/message.jspa?messageID=495274
+https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps
