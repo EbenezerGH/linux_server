@@ -203,6 +203,32 @@ application.secret_key = 'Add your secret key'
 
 79) sudo mv main.py __init__.py
 
+80) go into files and replace engine = create engine calls with:
+engine = create_engine('postgresql:///category:grader1234567890')
+
+81) source venv/bin/activate
+
+82) sudo pip install flask
+
+83) sudo apt-get install python-psycopg2
+
+84) pip install sqlalchemy
+
+85) sudo pip install --upgrade oauth2client
+
+86) pip install httplib2
+
+87) pip install requests
+
+88) apt-get install python-setuptools
+
+89) sudo easy_install psycopg2
+
+90) pip list
+
+Current Error:
+when run python database_setup.py in terminal:
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) FATAL:  role "grader" does not exist
 
 ### useful commands:
 /etc/apache2/sites-available
@@ -216,3 +242,4 @@ http://linuxcommand.org/
 https://github.com/EbenezerGH/item-category/blob/master/database_setup.py
 https://forums.aws.amazon.com/message.jspa?messageID=495274
 https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps
+http://stackoverflow.com/questions/20414015/no-module-named-flask-using-virtualenv
