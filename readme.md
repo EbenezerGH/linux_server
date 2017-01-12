@@ -97,13 +97,13 @@ port 2200
 
 45) add this to the file:
 
-`from flask import Flas`
-`app = Flask(__name__)`
-`@app.route("/")`
-`def hello():`
-`    return "Hello, I love Digital Ocean!"`
-`if __name__ == "__main__":`
-    `app.run()`
+`from flask import Flas
+app = Flask(__name__)
+@app.route("/")
+def hello():
+    return "Hello, I love Digital Ocean!"
+if __name__ == "__main__":
+    app.run()`
 
 46) sudo apt-get install python-pip
 
@@ -121,17 +121,17 @@ port 2200
 
 53) sudo python __init__.py
 
-54) test on http://localhost:5000/  NOT WORKING
+54) test on http://localhost:5000/  NOT WORKING  <---
 
-)deactivate
+56)deactivate
 
-)sudo nano /etc/apache2/sites-available/category_app
+57)sudo nano /etc/apache2/sites-available/category_app
 
-)sudo nano /etc/apache2/sites-available/category_app.conf
+58)sudo nano /etc/apache2/sites-available/category_app.conf
 
-)update both with:
+59)update both with:
 
-<VirtualHost *:80>
+`<VirtualHost *:80>
                 ServerName 35.167.206.80
                 ServerAdmin Ebenezer
                 WSGIScriptAlias / /var/www/category_app/category_app.wsgi
@@ -147,26 +147,26 @@ port 2200
                 ErrorLog ${APACHE_LOG_DIR}/error.log
                 LogLevel warn
                 CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
+</VirtualHost>`
 
-) service apache2 reload
+60) service apache2 reload
 
-) sudo a2ensite category_app_file
+61) sudo a2ensite category_app_file
 
-) sudo nano category_app.wsgi
+62) sudo nano category_app.wsgi
 
-) add this to the file:
+63) add this to the file:
 
-#!/usr/bin/python
+`#!/usr/bin/python
 import sys
 import logging
 logging.basicConfig(stream=sys.stderr)
 sys.path.insert(0,"/var/www/category_app/")
 
 from category_app import app as application
-application.secret_key = 'Add your secret key'
+application.secret_key = 'Add your secret key'`
 
-) sudo service apache2 restart
+64) sudo service apache2 restart
 
 
 
