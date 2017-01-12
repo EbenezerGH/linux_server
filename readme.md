@@ -6,7 +6,7 @@
 http://ec2-35.-67-63-158.us-west-2.compute.amazonaws.com/
 port 2200
 
-
+pass grader1234567890 -- remove
 1) download private key
 
 2) mv udacity_key.rsa ~/.ssh
@@ -19,7 +19,7 @@ port 2200
 
 6) sudo visudo - enter grader ALL=(ALL:ALL) ALL
 
-7) sudo nano /etc/sudoers
+7) sudo cd /etc/sudoers
 
 8) touch /etc/sudoers.d/grader
 
@@ -35,11 +35,15 @@ port 2200
 
 14) change PasswordAuthentication to yes
 
-15) change PermitRootLogin without-password to PermitRootLogin no to disallow root login
+15) change PermitRootLogin no
 
 16) add AllowUsers grader to the file
 
 17) sudo service ssh reload
+
+51) sudo nano /etc/hosts
+
+52) add 127.0.1.1 ip-10-20-30-62
 
 18) ssh-keygen
 
@@ -79,94 +83,96 @@ port 2200
 
 36) git config --global user.email eackon714@gmail.com
 
-37) cd /var/www
+37) sudo a2enmod wsgi
 
-38) sudo mkdir category_app
+38) cd /var/www
 
-39) cd category_app
+39) sudo mkdir FlaskApp
 
-40) sudo mkdir category_app
+40) cd FlaskApp
 
-41) cd category_app
+41) sudo mkdir FlaskApp
 
-42) sudo mkdir static
+42) cd FlaskApp
 
-43) sudo mkdir templates
+43) sudo mkdir static
 
-44) sudo nano __init__.py
+44) sudo mkdir templates
 
-45) add this to the file:
+45) sudo nano __init__.py
 
-`from flask import Flas
+46) add this to the file:
+
+from flask import Flask
 app = Flask(__name__)
 @app.route("/")
 def hello():
     return "Hello, I love Digital Ocean!"
 if __name__ == "__main__":
-    app.run()`
+    app.run()
 
-46) sudo apt-get install python-pip
+47) sudo apt-get install python-pip
 
-47) sudo pip install virtualenv
+48) sudo pip install virtualenv
 
-48) sudo virtualenv venv
+49) sudo chmod -R 777 venv
 
-49) source venv/bin/activate
+50) sudo virtualenv venv
 
-50) sudo pip install Flask
+51) source venv/bin/activate
 
-51) sudo nano /etc/hosts
-
-52) add 127.0.1.1 ip-10-20-63-33
+52) sudo pip install Flask
 
 53) sudo python __init__.py
 
-54) test on http://localhost:5000/  NOT WORKING  <---
+54) test on http://localhost:5000/
 
-56)deactivate
+55)deactivate
 
-57)sudo nano /etc/apache2/sites-available/category_app
+56)sudo nano /etc/apache2/sites-available/FlaskApp
 
-58)sudo nano /etc/apache2/sites-available/category_app.conf
+57)sudo nano /etc/apache2/sites-available/category_app.conf
 
-59)update both with:
+58)update both with:
 
-`<VirtualHost *:80>
+<VirtualHost *:80>
                 ServerName 35.167.63.158
                 ServerAdmin Ebenezer
-                WSGIScriptAlias / /var/www/category_app/category_app.wsgi
-                <Directory /var/www/category_app/category_app/>
+                WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi
+                <Directory /var/www/FlaskApp/FlaskApp/>
                         Order allow,deny
                         Allow from all
                 </Directory>
-                Alias /static /var/www/category_app/category_app/static
-                <Directory /var/www/categoryapp/category_app/static/>
+                Alias /static /var/www/FlaskApp/FlaskApp/static
+                <Directory /var/www/FlaskApp/FlaskApp/static/>
                         Order allow,deny
                         Allow from all
                 </Directory>
                 ErrorLog ${APACHE_LOG_DIR}/error.log
                 LogLevel warn
                 CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>`
+</VirtualHost>
+
+59) sudo a2ensite FlaskApp
 
 60) service apache2 reload
 
-61) sudo a2ensite category_app_file
+61)cd /var/www/FlaskApp
 
-62) sudo nano category_app.wsgi
+62)sudo nano flaskapp.wsgi
 
 63) add this to the file:
 
-`#!/usr/bin/python
+#!/usr/bin/python
 import sys
 import logging
 logging.basicConfig(stream=sys.stderr)
-sys.path.insert(0,"/var/www/category_app/")
+sys.path.insert(0,"/var/www/FlaskApp/")
 
-from category_app import app as application
-application.secret_key = 'Add your secret key'`
+from FlaskApp import app as application
+application.secret_key = 'Add your secret key'
 
-64) sudo service apache2 restart
+64)sudo service apache2 restart
 
 
 
