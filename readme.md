@@ -2,8 +2,8 @@
 # Project 7 - Linux Configuration Server
 
 ##server configurations:
-35.167.206.80
-http://ec2-35-167-206-80.us-west-2.compute.amazonaws.com/
+35.167.63.158
+http://ec2-35.-67-63-158.us-west-2.compute.amazonaws.com/
 port 2200
 
 
@@ -13,7 +13,7 @@ port 2200
 
 3) chmod 600 ~/.ssh/udacity_key.rsa
 
-4) ssh -i ~/.ssh/udacity_key.rsa root@35.167.206.80
+4) ssh -i ~/.ssh/udacity_key.rsa root@35.167.63.158
 
 5) sudo adduser grader
 
@@ -43,9 +43,9 @@ port 2200
 
 18) ssh-keygen
 
-19) ssh-copy-id grader@35.167.206.80 -p 2200
+19) ssh-copy-id grader@35.167.63.158 -p 2200
 
-20) ssh -v grader@35.167.206.80 -p 2200
+20) ssh -v grader@35.167.63.158 -p 2200
 
 21) sudo nano /etc/ssh/sshd_config
 
@@ -132,7 +132,7 @@ if __name__ == "__main__":
 59)update both with:
 
 `<VirtualHost *:80>
-                ServerName 35.167.206.80
+                ServerName 35.167.63.158
                 ServerAdmin Ebenezer
                 WSGIScriptAlias / /var/www/category_app/category_app.wsgi
                 <Directory /var/www/category_app/category_app/>
@@ -170,7 +170,8 @@ application.secret_key = 'Add your secret key'`
 
 
 
-
+### useful commands:
+/etc/apache2/sites-available
 Sources:
 https://www.udacity.com/account#!/development_environment
 https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
