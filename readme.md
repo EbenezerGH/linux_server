@@ -2,17 +2,17 @@
 # Project 7 - Linux Configuration Server
 
 ##server configurations:
-IP: 35.167.63.158
-AWS: http://ec2-35-167-63-158.us-west-2.compute.amazonaws.com/
+IP: 35.160.242.132
+AWS: http://ec2-35-160-242-132-us-west-2.compute.amazonaws.com/
 SSH PORT: port 2200
 
 1) download private key
 
 2) mv udacity_key.rsa ~/.ssh
 
-3) chmod 600 ~/.ssh/udacity_key.rsa
+3) chmod 600 ~/.ssh/udacity_ssh/udacity_key.rsa
 
-4) ssh -i ~/.ssh/udacity_key.rsa root@35.167.63.158
+4) ssh -i ~/.ssh/udacity_ssh/udacity_key.rsa root@35.160.242.132
 
 5) sudo adduser grader
 
@@ -40,67 +40,77 @@ SSH PORT: port 2200
 
 17) sudo service ssh reload
 
-51) sudo nano /etc/hosts
+18) sudo nano /etc/hosts
 
-52) add 127.0.1.1 ip-10-20-30-62
+19) add 127.0.1.1 ip-10-20-30-62
 
-18) ssh-keygen
+20) ssh-keygen - locally
 
-19) ssh-copy-id grader@35.167.63.158 -p 2200
+21) su - grader
 
-20) ssh -v grader@35.167.63.158 -p 2200
+22) mkdir .ssh
 
-21) sudo nano /etc/ssh/sshd_config
+23) touch .ssh/authorized_keys
 
-22) change PasswordAuthentication no
+24) nano .ssh/authorized_keys
 
-23) sudo service ssh restart
+25) chmod 700 .ssh
 
-24) sudo ufw default allow outgoing
+26) chmod 644 .ssh/authorized_keys
 
-25) sudo ufw default deny incoming
+27) ssh -i .ssh/udacity_ssh/id_rsa grader@35.160.242.132 -p 2200
 
-26) sudo ufw allow 2200/tcp
+28) sudo nano /etc/ssh/sshd_config
 
-27) sudo ufw allow 80/tcp
+29) change PasswordAuthentication no
 
-28) sudo ufw allow 123/udp
+30) sudo service ssh restart
 
-29) sudo ufw enable
+31) sudo ufw default allow outgoing
 
-30) sudo dpkg-reconfigure tzdata
+32) sudo ufw default deny incoming
 
-31) sudo apt-get install apache2
+33) sudo ufw allow 2200/tcp
 
-32) sudo apt-get install python-setuptools libapache2-mod-wsgi
+34) sudo ufw allow 80/tcp
 
-33) sudo service apache2 restart
+35) sudo ufw allow 123/udp
 
-34) sudo apt-get install git
+36) sudo ufw enable
 
-35) git config --global user.name EbenezerGH
+37) sudo dpkg-reconfigure tzdata
 
-36) git config --global user.email eackon714@gmail.com
+38) sudo apt-get install apache2
 
-37) sudo a2enmod wsgi
+39) sudo apt-get install python-setuptools libapache2-mod-wsgi
 
-38) cd /var/www
+40) sudo service apache2 restart
 
-39) sudo mkdir FlaskApp
+41) sudo apt-get install git
 
-40) cd FlaskApp
+42) git config --global user.name EbenezerGH
 
-41) sudo mkdir FlaskApp
+43) git config --global user.email eackon714@gmail.com
 
-42) cd FlaskApp
+44) sudo a2enmod wsgi
 
-43) sudo mkdir static
+45) cd /var/www
 
-44) sudo mkdir templates
+46) sudo mkdir FlaskApp
 
-45) sudo nano __init__.py
+47) cd FlaskApp
 
-46) add this to the file:
+48) sudo mkdir FlaskApp
+
+49) cd FlaskApp
+
+50) sudo mkdir static
+
+51) sudo mkdir templates
+
+52) sudo nano __init__.py
+
+53) add this to the file:
 
 from flask import Flask
 app = Flask(__name__)
@@ -110,32 +120,32 @@ def hello():
 if __name__ == "__main__":
     app.run()
 
-47) sudo apt-get install python-pip
+54) sudo apt-get install python-pip
 
-48) sudo pip install virtualenv
+55) sudo pip install virtualenv
 
-49) sudo chmod -R 777 venv
+56) sudo virtualenv venv
 
-50) sudo virtualenv venv
+57) sudo chmod -R 777 venv
 
-51) source venv/bin/activate
+58) source venv/bin/activate
 
-52) sudo pip install Flask
+59) sudo pip install Flask
 
-53) sudo python __init__.py
+60) sudo python __init__.py
 
-54) test on http://localhost:5000/
+61) test on http://localhost:5000/
 
-55)deactivate
+62)deactivate
 
-56)sudo nano /etc/apache2/sites-available/FlaskApp
+63)sudo nano /etc/apache2/sites-available/FlaskApp
 
-57)sudo nano /etc/apache2/sites-available/category_app.conf
+64)sudo nano /etc/apache2/sites-available/flask_app.conf
 
-58)update both with:
+65)update both with:
 
 <VirtualHost *:80>
-                ServerName 35.167.63.158
+                ServerName 35.160.242.132
                 ServerAdmin Ebenezer
                 WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi
                 <Directory /var/www/FlaskApp/FlaskApp/>
@@ -152,15 +162,15 @@ if __name__ == "__main__":
                 CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 
-59) sudo a2ensite FlaskApp
+66) sudo a2ensite FlaskApp
 
-60) service apache2 reload
+67) service apache2 reload
 
-61)cd /var/www/FlaskApp
+68)cd /var/www/FlaskApp
 
-62)sudo nano flaskapp.wsgi
+69)sudo nano flaskapp.wsgi
 
-63) add this to the file: #!/usr/bin/python
+70) add this to the file: #!/usr/bin/python
 import sys
 import logging
 logging.basicConfig(stream=sys.stderr)
@@ -169,7 +179,11 @@ sys.path.insert(0,"/var/www/FlaskApp/")
 from FlaskApp import app as application
 application.secret_key = 'Add your secret key'
 
-64)sudo service apache2 restart
+71)sudo service apache2 restart
+
+**AT THIS POINT GOING TO 35.160.242.132 DISPLAYS THE CORRECT SAMPLE TEXT!
+tbc...
+
 
 65) sudo apt-get update
 
@@ -230,17 +244,19 @@ engine = create_engine('postgresql:///category:password@localhost/category')
 
 92) sudo service apache2 restart
 
-93) ServerAlias HOSTNAME http://ec2-35-167-63-158.us-west-2.compute.amazonaws.com/
+93) ServerAlias HOSTNAME http://ec2-35-160-242-132.us-west-2.compute.amazonaws.com/
 
 Error:
-Nothing is displaying on page
+Currently can't inport sqlAlchemy
 
 ### useful personal commands:
 /etc/apache2/sites-available
+
 pip list
+
 sudo tail -10 /var/log/apache2/error.log
 
-Resources:
+###Resources:
 https://www.udacity.com/account#!/development_environment
 https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
 https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu
@@ -253,3 +269,5 @@ https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-
 http://stackoverflow.com/questions/20414015/no-module-named-flask-using-virtualenv
 http://stackoverflow.com/questions/12728004/error-no-module-named-psycopg2-extensions
 http://stackoverflow.com/questions/10572498/importerror-no-module-named-sqlalchemy
+https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2
+http://unix.stackexchange.com/questions/3568/how-to-switch-between-users-on-one-terminal
