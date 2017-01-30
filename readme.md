@@ -3,7 +3,7 @@
 
 ##server configurations:
 IP: 35.160.242.132
-AWS: http://ec2-35-160-242-132-us-west-2.compute.amazonaws.com/
+AWS: http://ec2-35-160-242-132.us-west-2.compute.amazonaws.com/
 SSH PORT: port 2200
 
 1) download private key
@@ -182,78 +182,110 @@ application.secret_key = 'Add your secret key'
 71)sudo service apache2 restart
 
 **AT THIS POINT GOING TO 35.160.242.132 DISPLAYS THE CORRECT SAMPLE TEXT!
-tbc...
+
+72) sudo apt-get update
+
+73) sudo apt-get install postgresql postgresql-contrib
+
+74) sudo su - postgres
+
+75) psql
+
+76) CREATE DATABASE category;
+
+77) CREATE USER category;
+
+78) ALTER ROLE category WITH PASSWORD 'password';
+
+79) GRANT ALL PRIVILEGES ON DATABASE category TO category;
+
+80) \q
+
+81) exit
+
+82) sudo apt-get install git
+
+83) sudo git clone https://github.com/EbenezerGH/item-category.git
+
+84) sudo mv item-category/[everything in here] sudo mv /FlaskApp
+
+85) sudo rm -r item-category
+
+86) sudo mv main.py __init__.py
+
+87) go into files and replace engine = create engine calls with:
+engine = create_engine('postgresql://category:password@localhost/category')
+
+88) source venv/bin/activate
+
+89) sudo pip install flask
+
+90) sudo apt-get install python-psycopg2
+
+91) pip install sqlalchemy
+
+92) pip install --upgrade oauth2client
+
+92) pip install httplib2
+
+93) pip install requests
+
+94) sudo apt-get install python-setuptools
+
+95) sudo easy_install psycopg2
+
+96) sudopip install --upgrade oauth2client
+
+97) create Category Directories with the same file structure as FlaskApp directories
+
+98) insert this in category.wsgi
+
+99) sudo service apache2 restart
+
+100) sudo service apache2 reload
+
+101) sudo service postgresql restart
+
+102) paste this in category.conf
+ServerAlias HOSTNAME http://ec2-35-160-242-132-us-west-2.compute.amazonaws.com/
+
+103) add 35.160.242.132 and http://ec2-35-160-242-132.us-west-2.compute.amazonaws.com/ to google credentials
 
 
-65) sudo apt-get update
+from flask import Flask
+app = Flask(__name__)
+@app.route("/")
+def hello():
+    return "JUST WORK!!"
+if __name__ == "__main__":
+    app.run()
 
-66) sudo apt-get install postgresql postgresql-contrib
+101) Create sudo nano /etc/apache2/sites-available/category.conf and paste this in
 
-67) sudo su - postgres
+<VirtualHost *:80>
+    ServerName 35.160.242.132
+    ServerAdmin eackon714@gmail.com
+    ServerAlias http://ec2-35-160-242-132.us-west-2.compute.amazonaws.com/
+    WSGIScriptAlias / /var/www/Category/category.wsgi
+    <Directory /var/www/Category/Category/>
+        Order allow,deny
+        Allow from all
+    </Directory>
+    Alias /static /var/www/Category/Category/static
+    <Directory /var/www/Category/Category/static/>
+        Order allow,deny
+        Allow from all
+    </Directory>
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    LogLevel warn
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
 
-68) psql
-
-69) CREATE DATABASE category;
-
-70) CREATE USER category;
-
-71) ALTER ROLE category WITH PASSWORD 'password';
-
-72) GRANT ALL PRIVILEGES ON DATABASE category TO category;
-
-73) \q
-
-74) exit
-
-75) sudo apt-get install git
-
-76) sudo git clone https://github.com/EbenezerGH/item-category.git
-
-77) sudo mv item-category/[everything in here] sudo mv /FlaskApp
-
-78) sudo rm -r item-category
-
-79) sudo mv main.py __init__.py
-
-80) go into files and replace engine = create engine calls with:
-engine = create_engine('postgresql:///category:password@localhost/category')
-
-81) source venv/bin/activate
-
-82) sudo pip install flask
-
-83) sudo apt-get install python-psycopg2
-
-84) pip install sqlalchemy
-
-85) sudo pip install --upgrade oauth2client
-
-86) pip install httplib2
-
-87) pip install requests
-
-88) apt-get install python-setuptools
-
-89) sudo easy_install psycopg2
-
-90) pip install --upgrade oauth2client
-
-91) sudo mv flaskapp.wsgi /var/www/FlaskApp/
-
-92) pip install Flask-SQLAlchemy
-
-92) sudo service apache2 restart
-
-93) ServerAlias HOSTNAME http://ec2-35-160-242-132.us-west-2.compute.amazonaws.com/
-
-Error:
-Currently can't inport sqlAlchemy
+101) ServerAlias http://ec2-35-160-242-132.us-west-2.compute.amazonaws.com/
 
 ### useful personal commands:
 /etc/apache2/sites-available
-
 pip list
-
 sudo tail -10 /var/log/apache2/error.log
 
 ###Resources:
@@ -271,3 +303,6 @@ http://stackoverflow.com/questions/12728004/error-no-module-named-psycopg2-exten
 http://stackoverflow.com/questions/10572498/importerror-no-module-named-sqlalchemy
 https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2
 http://unix.stackexchange.com/questions/3568/how-to-switch-between-users-on-one-terminal
+http://stackoverflow.com/questions/11919391/postgresql-error-fatal-role-username-does-not-exist
+http://snipplr.com/view/15626/apache2--enabling-and-disabling-sites/
+http://stackoverflow.com/questions/12201928/python-open-method-ioerror-errno-2-no-such-file-or-directory
